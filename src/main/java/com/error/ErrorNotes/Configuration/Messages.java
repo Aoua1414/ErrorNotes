@@ -1,4 +1,4 @@
-package com.error.ErrorNotes.Autres;
+package com.error.ErrorNotes.Configuration;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

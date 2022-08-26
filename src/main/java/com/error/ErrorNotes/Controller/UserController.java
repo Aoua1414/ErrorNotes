@@ -1,10 +1,10 @@
 package com.error.ErrorNotes.Controller;
 
-import com.error.ErrorNotes.Autres.Messages;
-import com.error.ErrorNotes.Model.Role;
+import com.error.ErrorNotes.Configuration.Messages;
 import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.service.UserService;
-import org.aspectj.bridge.Message;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(value = "hello", description = "Population's methods")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -20,6 +21,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @ApiOperation(value = "supprimer un element dans la table population")
     @PostMapping("/add")
     public ResponseEntity<Object> ajouter(@RequestBody User user){
         try {
@@ -29,6 +31,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "supprimer un element dans la table population")
     public User modifier(@RequestBody User user,  Long id_user){
 
         return userService.modifier(user, id_user);

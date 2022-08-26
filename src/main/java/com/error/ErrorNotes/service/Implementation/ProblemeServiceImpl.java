@@ -23,10 +23,10 @@ public class ProblemeServiceImpl implements ProblemeService {
     @Override
     public Object recherche(String mot_cle) {
         if(mot_cle!= null){
-            List<Probleme> retrouve =problemeRepository.findAll();
+            List<Probleme> recherche =problemeRepository.findAll();
 
-            if (retrouve.size() != 0){
-                return retrouve;
+            if (recherche.size() != 0){
+                return recherche;
             }else {
                 return "Desole ce mot est introuvable";
             }
