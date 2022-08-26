@@ -2,10 +2,7 @@ package com.error.ErrorNotes.Model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -19,6 +16,9 @@ public class User {
     private  String nom;
     private  String prenom;
     private  String contact;
+    private  String password;
+
+    @Enumerated(EnumType.STRING) //
     private  Role role;
 
 }

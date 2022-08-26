@@ -8,6 +8,7 @@ public interface ProblemeService {
 
 
     Probleme ajouter(Probleme probleme);
+    Object recherche(String mot_cle);
 
     String supprimer(Long id_probleme);
 
