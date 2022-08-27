@@ -8,10 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "hello", description = "Population's methods")
 @RestController
@@ -21,8 +18,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ApiOperation(value = "supprimer un element dans la table population")
-    @PostMapping("/add")
+    @ApiOperation(value = "Ajouter un user")
+    @PostMapping("/ajouter")
     public ResponseEntity<Object> ajouter(@RequestBody User user){
         try {
              return Messages.reponse("",HttpStatus.OK,userService.ajouter(user));
@@ -31,8 +28,8 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "supprimer un element dans la table population")
-    public User modifier(@RequestBody User user,  Long id_user){
+    @ApiOperation(value = "")
+    public User modifier(@RequestBody User user, @PathVariable Long id_user){
 
         return userService.modifier(user, id_user);
     }

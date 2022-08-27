@@ -3,11 +3,15 @@ package com.error.ErrorNotes.service.Implementation;
 import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Repository.CommentaireRepository;
 import com.error.ErrorNotes.service.CommentaireService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentaireServiceImpl implements CommentaireService {
 
+    @Autowired
     CommentaireRepository commentaireRepository;
 
 
