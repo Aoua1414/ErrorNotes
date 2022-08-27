@@ -6,29 +6,24 @@ import com.error.ErrorNotes.Repository.ProblemeRepository;
 import com.error.ErrorNotes.Repository.UserRepository;
 import com.error.ErrorNotes.service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
-@RequestMapping("/probleme")
+@Controller
 public class ProblemeServiceImpl implements ProblemeService {
 
     @Autowired
     ProblemeRepository problemeRepository;
+    @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/add")
+
     @Override
-    public Probleme ajouter(Probleme probleme, User id_user)
+    public Probleme ajouter(Probleme probleme)
     {
-         User us = new User();
-         us.getNom();
-         us.getRole();
-         userRepository.save(id_user);
         return problemeRepository.save(probleme);
     }
 
