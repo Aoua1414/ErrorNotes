@@ -4,9 +4,11 @@ import com.error.ErrorNotes.Model.Probleme;
 import com.error.ErrorNotes.Repository.ProblemeRepository;
 import com.error.ErrorNotes.service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProblemeServiceImpl implements ProblemeService {
 
     @Autowired
