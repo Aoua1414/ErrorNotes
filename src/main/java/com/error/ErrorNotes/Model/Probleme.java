@@ -22,9 +22,9 @@ public class Probleme {
     private  String technologie;
     private  String methode_de_recherche;
 
+
+    @Enumerated(EnumType.STRING)
     private  Etats etats;
-
-
 
     @ManyToOne
     @JoinColumn(name = "id_user")

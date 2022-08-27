@@ -1,19 +1,34 @@
 package com.error.ErrorNotes.service.Implementation;
 
 import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.Repository.ProblemeRepository;
+import com.error.ErrorNotes.Repository.UserRepository;
 import com.error.ErrorNotes.service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
+@RestController
+@RequestMapping("/probleme")
 public class ProblemeServiceImpl implements ProblemeService {
 
     @Autowired
     ProblemeRepository problemeRepository;
+    UserRepository userRepository;
 
+    @PostMapping("/add")
     @Override
-    public Probleme ajouter(Probleme probleme) {
+    public Probleme ajouter(Probleme probleme, User id_user)
+    {
+         User us = new User();
+         us.getNom();
+         us.getRole();
+         userRepository.save(id_user);
         return problemeRepository.save(probleme);
     }
 

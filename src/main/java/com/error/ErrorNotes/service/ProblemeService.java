@@ -1,13 +1,14 @@
 package com.error.ErrorNotes.service;
 
 import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.User;
+import com.error.ErrorNotes.Repository.UserRepository;
 
 import java.util.List;
 
 public interface ProblemeService {
 
-
-    Probleme ajouter(Probleme probleme);
+    Probleme ajouter(Probleme probleme, User id_user);
     Object recherche(String mot_cle);
 
     String supprimer(Long id_probleme);
