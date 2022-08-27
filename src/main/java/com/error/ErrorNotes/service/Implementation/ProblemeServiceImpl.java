@@ -17,6 +17,23 @@ public class ProblemeServiceImpl implements ProblemeService {
         return problemeRepository.save(probleme);
     }
 
+
+
+    //Recherche par mot cle
+    @Override
+    public Object recherche(String mot_cle) {
+        if(mot_cle!= null){
+            List<Probleme> recherche =problemeRepository.findAll();
+
+            if (recherche.size() != 0){
+                return recherche;
+            }else {
+                return "Desole ce mot est introuvable";
+            }
+        }
+        return problemeRepository.findAll();
+    }
+
     @Override
     public String supprimer(Long id_probleme) {
         problemeRepository.deleteById(id_probleme);
