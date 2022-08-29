@@ -1,6 +1,8 @@
 package com.error.ErrorNotes.service.Implementation;
 
+import com.error.ErrorNotes.Model.Probleme;
 import com.error.ErrorNotes.Model.Solution;
+import com.error.ErrorNotes.Repository.ProblemeRepository;
 import com.error.ErrorNotes.Repository.SolutionRepository;
 import com.error.ErrorNotes.service.SolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,16 @@ import java.util.List;
 public class SolutionServiceImpl implements SolutionService {
    @Autowired
     SolutionRepository solutionRepository;
-
+@Autowired
+    ProblemeRepository problemeRepository;
     @Override
-    public Solution ajouter(Solution solution) {
+    public Solution ajouter(Solution solution, Probleme probleme) {
+
+        //Instanciation de probleme
+        Probleme prob = new Probleme();
+        prob.setTitre(prob.getTitre());
+        prob.setDescription(prob.getDescription());
+
         return solutionRepository.save(solution);
     }
 

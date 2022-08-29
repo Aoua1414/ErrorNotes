@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "hello", description = "Population's methods")
+@Api(value = "hello", description = "User controller")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,19 +21,31 @@ public class UserController {
     @ApiOperation(value = "Ajouter un user")
     @PostMapping("/ajouter")
     public ResponseEntity<Object> ajouter(@RequestBody User user){
+
         try {
-             return Messages.reponse("",HttpStatus.OK,userService.ajouter(user));
+             return Messages.reponse(user.getPrenom(),HttpStatus.OK,userService.ajouter(user));
         }catch (Exception e){
             return Messages.reponse(e.getMessage(), HttpStatus.OK, null);
         }
     }
 
+
+
+    @ApiOperation(value = " ")
+    @PostMapping("/connexion/{email}/{password}")
+    public boolean Connexion(@PathVariable String email, @PathVariable String password){
+
+      return userService.Connexion(email,password);
+    }
+
     @ApiOperation(value = "")
+    @PutMapping("/update/{id_user}")
     public User modifier(@RequestBody User user, @PathVariable Long id_user){
 
         return userService.modifier(user, id_user);
     }
 
+    @ApiOperation(value = " ")
     @DeleteMapping("/delete/{id_user}")
     public  String supprimer(@PathVariable Long id_user){
         userService.supprimer(id_user);

@@ -22,18 +22,37 @@ public class ProblemeServiceImpl implements ProblemeService {
 
 
     @Override
-    public Probleme ajouter(Probleme probleme)
+    public Probleme ajouter(Probleme probleme, String email)
     {
-        return problemeRepository.save(probleme);
+
+                if( userRepository.findByEmail(email) != null){
+                    return problemeRepository.save(probleme);
+                }else{
+                    System.out.println("Impossible d'ajouter un probleme verifier votre email");
+                    return null;
+                }
+
+
     }
 
+    @Override
+    public Probleme  VerifierProblemeParTitre(String titre) {
+        return problemeRepository.findByTitre(titre);
+    }
+
+
+
+    @Override
+    public Probleme trouverParSolution(String solution) {
+        return null;
+    }
 
 
     //Recherche par mot cle
     @Override
     public Object recherche(String mot_cle) {
-        if(mot_cle!= null){
-            List<Probleme> recherche =problemeRepository.findAll();
+        if(mot_cle != null){
+            List<Probleme> recherche =problemeRepository.findAll(mot_cle);
 
             if (recherche.size() != 0){
                 return recherche;

@@ -1,5 +1,7 @@
 package com.error.ErrorNotes.service.Implementation;
 
+import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Solution;
 import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.Repository.UserRepository;
 import com.error.ErrorNotes.service.UserService;
@@ -15,6 +17,61 @@ public class UserServiceImpl implements UserService {
     @Override
     public User ajouter(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public boolean Connexion(String email, String password) {
+        if (userRepository.existsByEmail(email) && userRepository.existsByPassword(password)) {
+           System.out.println("Connecter avec succès");
+            return  true;
+        }
+        if (userRepository.existsByEmail(email)==false && userRepository.existsByPassword(password)==false){
+           System.out.println("Cet email ou mot de passe n'existe pas") ;
+            return false;
+        }
+        System.out.println("Cet utilisateur n'existe pas ");
+        return false;
+    }
+
+    @Override
+    public User trouverCompteParEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User trouverUserParCompte(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public Probleme trouverProblemeParId(Long id) {
+        return null;
+    }
+
+    @Override
+    public Solution creerSolution(Solution solution, Probleme probleme) {
+        return null;
+    }
+
+    @Override
+    public Solution trouverSolutionParIdProbleme(Long id_probleme) {
+        return null;
+    }
+      /*  if (userRepository.existsByEmail(email)==false && userRepository.existsByPassword(password)==false){
+
+            return "Cet email n'existe pas";
+
+
+
+        }else {
+                userRepository.findAll();
+            return "est connecter avec succès";
+        }
+    */
+
+    @Override
+    public User Deconnexion(String email, String password) {
+        return null;
     }
 
     @Override
@@ -40,5 +97,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> afficher() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Probleme touverProblemeParTitre(String titire) {
+        return null;
     }
 }
