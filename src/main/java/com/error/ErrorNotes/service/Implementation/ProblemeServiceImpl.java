@@ -19,16 +19,12 @@ public class ProblemeServiceImpl implements ProblemeService {
 
     @Autowired
     ProblemeRepository problemeRepository;
-    UserRepository userRepository;
 
-    @PostMapping("/add")
+
+
     @Override
-    public Probleme ajouter(Probleme probleme, User id_user)
+    public Probleme ajouter(Probleme probleme)
     {
-         User us = new User();
-         us.getNom();
-         us.getRole();
-         userRepository.save(id_user);
         return problemeRepository.save(probleme);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 
-public class UserServiceImpl implements UserService {
+    public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
     @Override
@@ -41,4 +41,21 @@ public class UserServiceImpl implements UserService {
     public List<User> afficher() {
         return userRepository.findAll();
     }
-}
+
+    @Override
+    public boolean connexion(String email, String password) {
+        User user= userRepository.findByEmail(email);
+        if(user!=null && user.getPassword().equals(password)){
+            return true;
+
+        }
+        else{
+        return false;
+        }
+    }
+
+    // @Override
+    //public String seconnecter(User user) {
+       // return user.getPassword();
+    }
+

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProblemeService {
 
-    Probleme ajouter(Probleme probleme, User id_user);
+    Probleme ajouter(Probleme probleme);
     Object recherche(String mot_cle);
 
     String supprimer(Long id_probleme);

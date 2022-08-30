@@ -43,4 +43,9 @@ public class SolutionServiceImpl implements SolutionService {
         return solutionRepository.findAll();
     }
 
+    @Override
+    public Solution verifier(Solution solution) {
+        return null;
+    }
+
 }

@@ -15,4 +15,7 @@ public interface UserService {
     User modifier(User user, Long id_user);
 
     List<User> afficher();
+
+     boolean connexion( String email, String password);
+
 }

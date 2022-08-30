@@ -34,4 +34,8 @@ public class UserController {
         return userService.modifier(user, id_user);
     }
 
+    @PostMapping("/connexion")
+    public boolean connexion(String email, String password){
+        return userService.connexion(email,password);
+    }
 }

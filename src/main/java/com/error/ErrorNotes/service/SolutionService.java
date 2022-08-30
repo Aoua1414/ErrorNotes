@@ -11,4 +11,8 @@ public interface SolutionService {
     Solution modifier(Solution solution, Long id_solution);
     String supprimer(Long id_solution);
     List<Solution> afficher();
+
+    //pour que seuls les deux admins seuls puissent commenter
+
+    Solution verifier(Solution solution);
 }

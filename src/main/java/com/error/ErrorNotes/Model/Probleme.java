@@ -20,6 +20,7 @@ public class Probleme {
     private  String titre;
     private  String description;
     private  String technologie;
+
     private  String methode_de_recherche;
 
 
