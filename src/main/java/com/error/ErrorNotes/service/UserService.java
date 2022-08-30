@@ -1,5 +1,6 @@
 package com.error.ErrorNotes.service;
 
+import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Model.Probleme;
 import com.error.ErrorNotes.Model.Solution;
 import com.error.ErrorNotes.Model.User;
@@ -10,6 +11,7 @@ import java.util.List;
 public interface UserService {
 
     User ajouter(User user);
+    Commentaire creerCommentaire (Commentaire commentaire,User user, Solution solution);
 
     boolean Connexion(String email, String password);
 
@@ -26,5 +28,5 @@ public interface UserService {
 
     List<User> afficher();
 
-    Probleme touverProblemeParTitre(String titire);
+    Probleme touverProblemeParTitre(String titre);
 }

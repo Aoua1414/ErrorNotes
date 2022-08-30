@@ -19,11 +19,11 @@ public class SolutionController {
     @Autowired
     UserService userService;
     @ApiOperation(value = "Ajout de solution")
-    @PostMapping("/ajouter")
-    public String ajouter(@RequestBody Solution solution, Probleme probleme , @PathVariable String email ,@PathVariable String password ,String titire){
+    @PostMapping("/ajouter/{email}/{password}/{titre}")
+    public String ajouter( @RequestBody Solution solution, @PathVariable String email ,@PathVariable String password ,@PathVariable  String titre){
 
       //Recuperer le probleme sur laquel la solution doit être postée
-        Probleme  prob = userService.touverProblemeParTitre(titire);
+        Probleme  prob = userService.touverProblemeParTitre(titre);
 
         //Verifier si le probleme existe ou pas
         if (prob != null){
@@ -34,22 +34,22 @@ public class SolutionController {
 
             Long id_userProbleme = userService.trouverProblemeParId(idPro).getUser().getId_user();
 
-            //Recuperer le compte de l'utilisateur qui veut resoudre le probleme par son email
+            //Recuperer le compte de l'utilisateur qui veut résoudre le probleme par son email
 
             User compte = userService.trouverCompteParEmail(email);
 
             //Recuperer l'id de l'user qui veut poster une solution
 
             Long id_useSolution = userService.trouverUserParCompte(compte).getId_user();
-
-            //si  email et password de l'user sont correct
+            //si email et password de l'user sont corrects
 
             if (userService.Connexion(email, password) && id_userProbleme.equals(id_useSolution)){
 
                 if (userService.trouverSolutionParIdProbleme(idPro) == null){
 
                     //creation de la solution
-                    Solution solu = userService.creerSolution(solution, probleme);
+                    Solution solu = userService.creerSolution(solution, prob);
+                    //solu.setProbleme(prob);
                     return  "Solution ajouter avec succès";
                 }
                 else {
@@ -64,9 +64,13 @@ public class SolutionController {
         }
 
     }
+
+
     @ApiOperation(value = "Ajout de solution")
     @DeleteMapping("/supprimer")
     public String supprimer (@PathVariable Long id_solution){
+
+
         return solutionService.supprimer(id_solution);
     }
     @PutMapping("/modifier")

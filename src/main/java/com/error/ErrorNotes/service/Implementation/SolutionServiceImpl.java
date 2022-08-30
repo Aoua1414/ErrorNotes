@@ -1,7 +1,9 @@
 package com.error.ErrorNotes.service.Implementation;
 
+import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Model.Probleme;
 import com.error.ErrorNotes.Model.Solution;
+import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.Repository.ProblemeRepository;
 import com.error.ErrorNotes.Repository.SolutionRepository;
 import com.error.ErrorNotes.service.SolutionService;
@@ -21,11 +23,12 @@ public class SolutionServiceImpl implements SolutionService {
 
         //Instanciation de probleme
         Probleme prob = new Probleme();
-        prob.setTitre(prob.getTitre());
-        prob.setDescription(prob.getDescription());
 
+        solution.setProbleme(probleme);
         return solutionRepository.save(solution);
     }
+
+
 
     @Override
     public Solution modifier(Solution solution, Long id_solution) {

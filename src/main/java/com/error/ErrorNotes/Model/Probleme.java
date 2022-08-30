@@ -17,7 +17,6 @@ public class Probleme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id_probleme;
-    @Column(name = "titre", length = 50, nullable = false, unique = true)
     private  String titre;
     private  String description;
     private  String technologie;

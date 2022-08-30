@@ -1,9 +1,14 @@
 package com.error.ErrorNotes.service.Implementation;
 
+import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Model.Probleme;
 import com.error.ErrorNotes.Model.Solution;
 import com.error.ErrorNotes.Model.User;
+import com.error.ErrorNotes.Repository.ProblemeRepository;
+import com.error.ErrorNotes.Repository.SolutionRepository;
 import com.error.ErrorNotes.Repository.UserRepository;
+import com.error.ErrorNotes.service.CommentaireService;
+import com.error.ErrorNotes.service.SolutionService;
 import com.error.ErrorNotes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +19,35 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CommentaireService commentaireService;
+
+    @Autowired
+    ProblemeRepository problemeRepository;
+
+    @Autowired
+    SolutionService solutionService;
+
+    @Autowired
+    SolutionRepository solutionRepository;
     @Override
     public User ajouter(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public Commentaire creerCommentaire(Commentaire commentaire, User user, Solution solution) {
+
+        //Attribuer la date actuelle au commentaire
+
+        commentaire.setDate(commentaire.getDate());
+
+        //Attribution de la solution au probleme
+        commentaire.setSolution(solution);
+
+        //Attribution de l'user au commentaire
+        commentaire.setUser(user);
+        return commentaireService.ajouter(commentaire);
     }
 
     @Override
@@ -45,17 +76,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Probleme trouverProblemeParId(Long id) {
-        return null;
+        return problemeRepository.findById(id).get();
     }
 
     @Override
     public Solution creerSolution(Solution solution, Probleme probleme) {
-        return null;
+        return  solutionService.ajouter(solution,probleme);
     }
 
     @Override
     public Solution trouverSolutionParIdProbleme(Long id_probleme) {
-        return null;
+
+        return solutionRepository.FIND_SOLUTION_BY_ID_PROBLEME(id_probleme);
     }
       /*  if (userRepository.existsByEmail(email)==false && userRepository.existsByPassword(password)==false){
 
@@ -100,7 +132,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Probleme touverProblemeParTitre(String titire) {
-        return null;
+    public Probleme touverProblemeParTitre(String titre) {
+        return problemeRepository.findByTitre(titre);
     }
 }
