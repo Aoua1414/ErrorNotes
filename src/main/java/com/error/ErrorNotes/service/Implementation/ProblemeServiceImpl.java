@@ -6,35 +6,53 @@ import com.error.ErrorNotes.Repository.ProblemeRepository;
 import com.error.ErrorNotes.Repository.UserRepository;
 import com.error.ErrorNotes.service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
-@RequestMapping("/probleme")
+@Controller
 public class ProblemeServiceImpl implements ProblemeService {
 
     @Autowired
     ProblemeRepository problemeRepository;
+    @Autowired
+    UserRepository userRepository;
+
+
+    @Override
+    public Probleme ajouter(Probleme probleme, String email)
+    {
+
+                if( userRepository.findByEmail(email) != null){
+                    return problemeRepository.save(probleme);
+                }else{
+                    System.out.println("Impossible d'ajouter un probleme verifier votre email");
+                    return null;
+                }
+
+
+    }
+
+    @Override
+    public Probleme  VerifierProblemeParTitre(String titre) {
+        return problemeRepository.findByTitre(titre);
+    }
 
 
 
     @Override
-    public Probleme ajouter(Probleme probleme)
-    {
-        return problemeRepository.save(probleme);
+    public Probleme trouverParSolution(String solution) {
+        return null;
     }
-
 
 
     //Recherche par mot cle
     @Override
     public Object recherche(String mot_cle) {
-        if(mot_cle!= null){
-            List<Probleme> recherche =problemeRepository.findAll();
+        if(mot_cle != null){
+            List<Probleme> recherche =problemeRepository.findAll(mot_cle);
 
             if (recherche.size() != 0){
                 return recherche;

@@ -1,6 +1,9 @@
 package com.error.ErrorNotes.service;
 
 import com.error.ErrorNotes.Model.Commentaire;
+import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Solution;
+import com.error.ErrorNotes.Model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,11 +1,15 @@
 package com.error.ErrorNotes.service.Implementation;
 
 import com.error.ErrorNotes.Model.Commentaire;
+import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Solution;
+import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.Repository.CommentaireRepository;
 import com.error.ErrorNotes.service.CommentaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +21,9 @@ public class CommentaireServiceImpl implements CommentaireService {
 
     @Override
     public Commentaire ajouter(Commentaire commentaire) {
+
+
+
         return commentaireRepository.save(commentaire);
     }
 

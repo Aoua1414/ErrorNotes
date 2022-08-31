@@ -1,6 +1,8 @@
 package com.error.ErrorNotes.service;
 
-import com.error.ErrorNotes.Model.Role;
+import com.error.ErrorNotes.Model.Commentaire;
+import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Solution;
 import com.error.ErrorNotes.Model.User;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,16 @@ import java.util.List;
 public interface UserService {
 
     User ajouter(User user);
+    Commentaire creerCommentaire (Commentaire commentaire,User user, Solution solution);
+
+    boolean Connexion(String email, String password);
+
+    User trouverCompteParEmail(String email);
+    User trouverUserParCompte(User user);
+    Probleme trouverProblemeParId(Long id);
+    Solution creerSolution(Solution solution, Probleme probleme);
+    Solution trouverSolutionParIdProbleme(Long id_probleme);
+    User Deconnexion(String email, String password);
 
     String supprimer(Long id_user);
 
@@ -16,6 +28,5 @@ public interface UserService {
 
     List<User> afficher();
 
-     boolean connexion( String email, String password);
-
+    Probleme touverProblemeParTitre(String titre);
 }

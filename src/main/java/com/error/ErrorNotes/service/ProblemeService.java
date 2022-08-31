@@ -8,7 +8,12 @@ import java.util.List;
 
 public interface ProblemeService {
 
-    Probleme ajouter(Probleme probleme);
+    Probleme ajouter(Probleme probleme, String email);
+    //Probleme touverProblemeParTitre(String titre);
+    Probleme VerifierProblemeParTitre(String titre);
+
+    Probleme trouverParSolution(String solution);
+
     Object recherche(String mot_cle);
 
     String supprimer(Long id_probleme);
