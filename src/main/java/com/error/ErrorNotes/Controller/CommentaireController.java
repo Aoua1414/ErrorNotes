@@ -27,6 +27,7 @@ public class CommentaireController {
 
         //Authenfication
         if (userService.Connexion(email, password)){
+
             //recuperer le probleme correspondant au titre mis a l'url
             Probleme probleme = userService.touverProblemeParTitre(titre);
 
@@ -59,7 +60,7 @@ public class CommentaireController {
 
     }
     @PutMapping("/modifier/{id_commentaire}")
-    public Commentaire modifier(@RequestBody Commentaire commentaire, @PathVariable Long id_commentaire){
+    public Commentaire modifier(Commentaire commentaire, @PathVariable Long id_commentaire){
         return  commentaireService.modifier(commentaire,id_commentaire);
     }
     @DeleteMapping("/supprimer/{id_commentaire}")

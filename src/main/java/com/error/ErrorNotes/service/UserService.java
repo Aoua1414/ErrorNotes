@@ -1,14 +1,12 @@
 package com.error.ErrorNotes.service;
 
-import com.error.ErrorNotes.Model.Commentaire;
-import com.error.ErrorNotes.Model.Probleme;
-import com.error.ErrorNotes.Model.Solution;
-import com.error.ErrorNotes.Model.User;
+import com.error.ErrorNotes.Model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public interface UserService {
+
 
     User ajouter(User user);
     Commentaire creerCommentaire (Commentaire commentaire,User user, Solution solution);
@@ -29,4 +27,5 @@ public interface UserService {
     List<User> afficher();
 
     Probleme touverProblemeParTitre(String titre);
+
 }

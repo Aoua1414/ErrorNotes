@@ -20,6 +20,8 @@ public interface CommentaireService {
 
    List<Commentaire> afficher();
 
+   Commentaire trouverCommentaireParId(Long id_commentaire);
+
 
 
 

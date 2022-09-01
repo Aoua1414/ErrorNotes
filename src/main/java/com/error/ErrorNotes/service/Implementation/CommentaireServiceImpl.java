@@ -50,4 +50,9 @@ public class CommentaireServiceImpl implements CommentaireService {
     public List<Commentaire> afficher() {
         return commentaireRepository.findAll();
     }
+
+    @Override
+    public Commentaire trouverCommentaireParId(Long id_commentaire) {
+        return null;
+    }
 }

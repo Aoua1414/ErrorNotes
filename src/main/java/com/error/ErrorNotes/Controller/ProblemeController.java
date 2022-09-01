@@ -1,7 +1,9 @@
 package com.error.ErrorNotes.Controller;
 
 import com.error.ErrorNotes.Configuration.Messages;
+import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.service.CommentaireService;
 import com.error.ErrorNotes.service.ProblemeService;
 import com.error.ErrorNotes.service.UserService;
 import org.aspectj.bridge.Message;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/probleme")
 public class ProblemeController {
@@ -17,8 +21,11 @@ public class ProblemeController {
     ProblemeService problemeService;
     @Autowired
     UserService userService;
+
+    @Autowired
+    CommentaireService commentaireService;
     @PostMapping ("/ajouter/{email}")
-    public ResponseEntity<Object> ajouter(@RequestBody Probleme probleme, @PathVariable("email") String email){
+    public ResponseEntity<Object> ajouter(Probleme probleme, @PathVariable("email") String email){
 
 
 
@@ -51,16 +58,47 @@ try {
    // userService.ajouter(id_user);
 
 }
-    @PutMapping("/modifier/{id_probleme}")
-    public Probleme modifier(@RequestBody Probleme probleme, @PathVariable Long id_probleme){
-    return problemeService.modifier(probleme, id_probleme);
+    @PutMapping("/modifier/{email}/{password}/{id_probleme}")
+    public String modifier(Probleme probleme, @PathVariable Long id_probleme, @PathVariable String email, @PathVariable String password){
+
+        if (userService.Connexion(email, password)){
+            problemeService.modifier(probleme, id_probleme);
+            return "Probleme modifier avec succès";
+
+
+        }else {
+            return "Accès refusé";
+        }
 }
-    @DeleteMapping ("/supprimer/{id_probleme}")
-    public String supprimer(Probleme probleme, @PathVariable Long id_probleme){
-    return problemeService.supprimer( id_probleme);
+    @DeleteMapping ("/supprimer/{email}/{password}/{id_probleme}")
+    public String supprimer(Probleme probleme, @PathVariable Long id_probleme,@PathVariable String email, @PathVariable String password){
+
+        if (userService.Connexion(email, password)) {
+
+          //  Commentaire commentaire = commentaireService.
+           // if (commentaireService.)
+            return "Probleme supprimer avec succès";
+        }else {
+
+
+              return "Accès refusé";
+        }
 }
-    @GetMapping("/recherche/{mot_cle}")
-    public Object recherche(@PathVariable String mot_cle){
-    return  problemeService.recherche(mot_cle);
+    @GetMapping("/recherche/{email}/{password}/{mot_cle}")
+    public Object recherche(@PathVariable String mot_cle ,@PathVariable String email, @PathVariable String password){
+
+
+        if (userService.Connexion(email, password)) {
+          return   problemeService.recherche(mot_cle);
+
+        }else {
+
+
+            return "Accès refusé";
+        }
+
     }
+
+
+
 }

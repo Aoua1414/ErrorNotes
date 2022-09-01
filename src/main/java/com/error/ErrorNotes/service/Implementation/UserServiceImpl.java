@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
     SolutionRepository solutionRepository;
     @Override
     public User ajouter(User user) {
+      //String mdp = user.getPassword();
+        //user.setPassword(passwordEncoder.encode(mdp));
         return userRepository.save(user);
     }
 
@@ -53,14 +55,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean Connexion(String email, String password) {
         if (userRepository.existsByEmail(email) && userRepository.existsByPassword(password)) {
-           System.out.println("Connecter avec succès");
-            return  true;
+            System.out.println("Connecter avec succès");
+            return true;
         }
-        if (userRepository.existsByEmail(email)==false && userRepository.existsByPassword(password)==false){
-           System.out.println("Cet email ou mot de passe n'existe pas") ;
-            return false;
-        }
-        System.out.println("Cet utilisateur n'existe pas ");
         return false;
     }
 

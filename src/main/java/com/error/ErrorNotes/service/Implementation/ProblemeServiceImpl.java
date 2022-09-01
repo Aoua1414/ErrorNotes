@@ -53,7 +53,6 @@ public class ProblemeServiceImpl implements ProblemeService {
     public Object recherche(String mot_cle) {
         if(mot_cle != null){
             List<Probleme> recherche =problemeRepository.findAll(mot_cle);
-
             if (recherche.size() != 0){
                 return recherche;
             }else {

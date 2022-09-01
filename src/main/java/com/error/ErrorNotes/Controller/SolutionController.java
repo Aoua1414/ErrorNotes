@@ -7,7 +7,6 @@ import com.error.ErrorNotes.service.SolutionService;
 import com.error.ErrorNotes.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNullApi;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +19,7 @@ public class SolutionController {
     UserService userService;
     @ApiOperation(value = "Ajout de solution")
     @PostMapping("/ajouter/{email}/{password}/{titre}")
-    public String ajouter( @RequestBody Solution solution, @PathVariable String email ,@PathVariable String password ,@PathVariable  String titre){
+    public String ajouter( Solution solution, @PathVariable String email ,@PathVariable String password ,@PathVariable  String titre){
 
       //Recuperer le probleme sur laquel la solution doit être postée
         Probleme  prob = userService.touverProblemeParTitre(titre);
@@ -43,7 +42,7 @@ public class SolutionController {
             Long id_useSolution = userService.trouverUserParCompte(compte).getId_user();
             //si email et password de l'user sont corrects
 
-            if (userService.Connexion(email, password) && id_userProbleme.equals(id_useSolution)){
+            if (userService.Connexion(email,password) && id_userProbleme.equals(id_useSolution)){
 
                 if (userService.trouverSolutionParIdProbleme(idPro) == null){
 
