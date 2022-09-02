@@ -22,9 +22,9 @@ public class SolutionServiceImpl implements SolutionService {
     public Solution ajouter(Solution solution, Probleme probleme) {
 
         //Instanciation de probleme
-        Probleme prob = new Probleme();
+        //Probleme prob = new Probleme();
 
-        solution.setProbleme(probleme);
+        //solution.setProbleme(probleme);
         return solutionRepository.save(solution);
     }
 

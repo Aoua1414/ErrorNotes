@@ -3,6 +3,7 @@ package com.error.ErrorNotes.service.Implementation;
 import com.error.ErrorNotes.Model.Role;
 import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.Repository.UserRepository;
+import com.error.ErrorNotes.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,8 @@ class UserServiceImplTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserService service;
     @Test
     void ajouter() {
         User us = new User();
@@ -37,18 +40,51 @@ class UserServiceImplTest {
     }
 
     @Test
+    void modifier() {
+
+        String prenom = "Papa1";
+        String nom ="KONTE";
+        String email ="alykonte112@gmail.com";
+        String  role = "USER_ADMIN";
+        String contact = "77665544";
+        String password ="12345600";
+
+        User us = new User();
+
+        us.setPrenom(prenom);
+        us.setNom(nom);
+        us.setEmail(email);
+        us.setRole(Role.USER_ADMIN);
+        us.setContact(contact);
+        us.setPassword(password);
+       service.modifier(us, 4L);
+
+    }
+    @Test
     void creerCommentaire() {
     }
 
     @Test
     void connexion() {
-    }
+      String email ="alykonte19@gmail.com";
+      String password ="b123456";
 
-    @Test
-    void creerSolution() {
+
+      User use = new User();
+      use.setEmail(email);
+      use.setPassword(password);
+
+     service.Connexion( email, password);
     }
 
     @Test
     void afficher() {
+        service.afficher();
     }
+
+    @Test
+    void supprimer() {
+        service.supprimer(4L);
+    }
+
 }

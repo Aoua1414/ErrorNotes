@@ -1,6 +1,7 @@
 package com.error.ErrorNotes.Controller;
 
 import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Role;
 import com.error.ErrorNotes.Model.Solution;
 import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.service.SolutionService;
@@ -46,6 +47,7 @@ public class SolutionController {
 
                 if (userService.trouverSolutionParIdProbleme(idPro) == null){
 
+
                     //creation de la solution
                     Solution solu = userService.creerSolution(solution, prob);
                     //solu.setProbleme(prob);
@@ -66,15 +68,27 @@ public class SolutionController {
 
 
     @ApiOperation(value = "Ajout de solution")
-    @DeleteMapping("/supprimer")
-    public String supprimer (@PathVariable Long id_solution){
+    @DeleteMapping("/supprimer/{email}/{password}")
+    public String supprimer (@PathVariable Long id_solution, @PathVariable String email, @PathVariable String password) {
 
-
-        return solutionService.supprimer(id_solution);
+        User us = userService.trouverCompteParEmail(email);
+        if (us.getRole().equals(Role.USER)) {
+            return " Vous n'est pas autorisé a supprimer une solution ";
+        } else {
+            return solutionService.supprimer(id_solution);
+        }
     }
     @PutMapping("/modifier")
-    public Solution modifier(Solution solution,@PathVariable Long id_solution){
-        return solutionService.modifier(solution,id_solution);
+    public String modifier(Solution solution,@PathVariable Long id_solution , @PathVariable String email, @PathVariable String password){
+
+        User us = userService.trouverCompteParEmail(email);
+        if (us.getRole().equals(Role.USER)) {
+            return " Vous n'est pas autorisé a modifier une solution ";
+        } else {
+           solutionService.modifier(solution,id_solution);
+
+        }
+        return "Accès refusé";
     }
 
     }

@@ -23,6 +23,7 @@ public class UserController {
     @PostMapping("/ajouter")
     public ResponseEntity<Object> ajouter(@RequestBody User user){
 
+
         try {
              return Messages.reponse("Bienvenue "+user.getPrenom()+" "+user.getNom(),HttpStatus.OK,userService.ajouter(user));
         }catch (Exception e){
@@ -41,10 +42,10 @@ public class UserController {
 
     @ApiOperation(value = "")
     @PutMapping("/update/{email}/{password}/{id_user}")
-    public String modifier( User user, @PathVariable Long id_user, @PathVariable String email, @PathVariable String password){
+    public String modifier(User user, @PathVariable Long id_user, @PathVariable String email, @PathVariable String password){
 
         User use = userService.trouverCompteParEmail(email);
-        if (user.getRole().equals(Role.USER)) {
+        if (use.getRole().equals(Role.USER)) {
             return " Vous n'est pas autorisé a modifier un utilisateur";
         }else {
            userService.modifier(user, id_user);
@@ -77,14 +78,9 @@ public class UserController {
 
         if (userService.Connexion(email, password)) {
 
-            /*if (Connexion(email, password).equals(Role.USER)) {
-                return "Vous n'est pas autorisé";
-            }else {
-                return userService.afficher();
-            }*/
             User user = userService.trouverCompteParEmail(email);
             if (user.getRole().equals(Role.USER)) {
-                return "Vous n'est pas autorisé";
+                return "Vous n'est pas autorisé a afficher la liste des utilisateurs";
             }else {
                 return userService.afficher();
             }

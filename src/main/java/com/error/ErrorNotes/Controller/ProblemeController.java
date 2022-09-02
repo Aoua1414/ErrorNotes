@@ -3,6 +3,8 @@ package com.error.ErrorNotes.Controller;
 import com.error.ErrorNotes.Configuration.Messages;
 import com.error.ErrorNotes.Model.Commentaire;
 import com.error.ErrorNotes.Model.Probleme;
+import com.error.ErrorNotes.Model.Role;
+import com.error.ErrorNotes.Model.User;
 import com.error.ErrorNotes.service.CommentaireService;
 import com.error.ErrorNotes.service.ProblemeService;
 import com.error.ErrorNotes.service.UserService;
@@ -61,42 +63,43 @@ try {
     @PutMapping("/modifier/{email}/{password}/{id_probleme}")
     public String modifier(Probleme probleme, @PathVariable Long id_probleme, @PathVariable String email, @PathVariable String password){
 
-        if (userService.Connexion(email, password)){
-            problemeService.modifier(probleme, id_probleme);
-            return "Probleme modifier avec succès";
+        if (userService.Connexion(email, password)) {
+            User use = userService.trouverCompteParEmail(email);
+            if (use.getRole().equals(Role.USER)) {
+                return " Vous n'est pas autorisé a modifier un utilisateur";
+            } else {
+                problemeService.modifier(probleme, id_probleme);
+                return "Probleme modifier avec succès";
 
+            }
+        }            return "Accès refusé";
 
-        }else {
-            return "Accès refusé";
-        }
-}
+    }
     @DeleteMapping ("/supprimer/{email}/{password}/{id_probleme}")
     public String supprimer(Probleme probleme, @PathVariable Long id_probleme,@PathVariable String email, @PathVariable String password){
 
         if (userService.Connexion(email, password)) {
-
-          //  Commentaire commentaire = commentaireService.
-           // if (commentaireService.)
+            User use = userService.trouverCompteParEmail(email);
+            if (use.getRole().equals(Role.USER)) {
+                return " Vous n'est pas autorisé a supprimer  un probleme";
+            }else {
+                problemeService.supprimer(id_probleme);
+            }
             return "Probleme supprimer avec succès";
-        }else {
-
-
-              return "Accès refusé";
         }
-}
-    @GetMapping("/recherche/{email}/{password}/{mot_cle}")
-    public Object recherche(@PathVariable String mot_cle ,@PathVariable String email, @PathVariable String password){
+        return "Accès refusé";
 
+    }
+    @GetMapping("/recherche/{mot_cle}")
+    public Object recherche(@PathVariable String mot_cle ){
 
-        if (userService.Connexion(email, password)) {
           return   problemeService.recherche(mot_cle);
 
-        }else {
+    }
 
-
-            return "Accès refusé";
-        }
-
+    @GetMapping("/liste")
+    public  List<Probleme> afficher(){
+        return  problemeService.afficher();
     }
 
 
